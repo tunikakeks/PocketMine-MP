@@ -29,6 +29,9 @@ use const LC_ALL;
 
 class RegistryTraitTest extends TestCase{
 
+	/**
+	 * @phpstan-return \Generator<int, array{string, \Closure() : \stdClass}>, void, void>
+	 */
 	public function localeBugProvider() : \Generator{
 		yield ['tr_TR.UTF-8', function() : \stdClass{
 			return TestRegistry::INNER();
@@ -36,6 +39,7 @@ class RegistryTraitTest extends TestCase{
 	}
 
 	/**
+	 * @doesNotPerformAssertions
 	 * @dataProvider localeBugProvider
 	 * @phpstan-param \Closure() : \stdClass $testFunc
 	 */
@@ -45,6 +49,6 @@ class RegistryTraitTest extends TestCase{
 		}catch(Exception $e){
 			self::markTestSkipped($e->getMessage());
 		}
-		self::assertInstanceOf(\stdClass::class, $testFunc());
+		$testFunc();
 	}
 }
