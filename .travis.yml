@@ -4,6 +4,10 @@ language: php
 php:
  - 7.3
 
+before_install:
+ - sudo apt-get update
+ - sudo apt-get -y install language-pack-tr
+
 before_script:
  - phpenv config-rm xdebug.ini
  - ./tests/build-leveldb.sh 10f59b56bec1db3ffe42ff265afe22182073e0e2
